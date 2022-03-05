@@ -9,7 +9,8 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 public class back extends Command {
     public back(){
         this.name = "back";
-        this.help = "logs you out!";
+        this.aliases = new String []{"reentry", "relog"};
+        this.help = "logs you back in from break!";
         this.guildOnly = true;
         this.hidden = false;
     }

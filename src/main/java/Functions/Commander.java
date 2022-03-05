@@ -1,13 +1,11 @@
 package Functions;
 
-import Commands.back;
-import Commands.channel;
+import Commands.*;
 import Event.Watcher;
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import Commands.prefix;
 
 public class Commander extends ListenerAdapter {
     // Making the slash command
@@ -41,6 +39,8 @@ public class Commander extends ListenerAdapter {
         slash.addCommand(new Commands.in());
         slash.addCommand(new Commands.out());
         slash.addCommand(new back());
+        slash.addCommand(new timeout());
+        slash.addCommand(new visitor());
 
         commands = slash.build();
 

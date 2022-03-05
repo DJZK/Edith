@@ -9,6 +9,7 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 public class out extends Command {
     public out(){
         this.name = "out";
+        this.aliases = new String []{"logout", "bounce", "signout"};
         this.help = "logs you out!";
         this.guildOnly = true;
         this.hidden = false;

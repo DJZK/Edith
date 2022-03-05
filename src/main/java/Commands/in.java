@@ -9,6 +9,7 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 public class in extends Command {
     public in(){
         this.name = "in";
+        this.aliases = new String []{"login", "logon", "signin"};
         this.help = "logs you in!";
         this.guildOnly = true;
         this.hidden = false;
@@ -32,7 +33,7 @@ public class in extends Command {
             return;
         }
 
-        String[] message = e.getMessage().getContentRaw().split(" ");
+        String[] message = e.getMessage().getContentRaw().split(" ", 2);
 
         // Single command input
         if(message.length == 1){

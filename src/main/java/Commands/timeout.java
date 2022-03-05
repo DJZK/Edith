@@ -9,6 +9,7 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 public class timeout extends Command {
     public timeout(){
         this.name = "break";
+        this.aliases = new String [] {"timeout", "pee", "coffee"};
         this.help = "Break time!";
         this.guildOnly = true;
         this.hidden = false;
@@ -32,7 +33,7 @@ public class timeout extends Command {
             return;
         }
 
-        String[] message = e.getMessage().getContentRaw().split(" ");
+        String[] message = e.getMessage().getContentRaw().split(" ", 2);
 
         // Single command input
         if(message.length == 1){
