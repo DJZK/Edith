@@ -19,13 +19,16 @@ public class in extends Command {
 
         DatabaseHandles io = new DatabaseHandles();
         if(io.findUser(e.getAuthor().getId()).equals("")){
-            e.reply("You are not allowed to do that!");
+            e.replyInDm("You are not allowed to do that!");
+            if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
+                e.getMessage().delete().queue();
+            }
             return;
         }
 
         if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
             e.getMessage().delete().queue();
-            e.reply("You might wanna do that in <#" + DatabaseParameters.getChannelID() + ">");
+            e.getJDA().getTextChannelById(DatabaseParameters.getChannelID()).sendMessage("Do that here! " + e.getAuthor().getAsMention()).queue();
             return;
         }
 
