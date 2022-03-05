@@ -52,7 +52,25 @@ public class DatabaseParameters {
         BotToken = botToken;
     }
 
+    public static String getChannelID() {
+        return ChannelID;
+    }
+
+    public static void setChannelID(String channelID) {
+        ChannelID = channelID;
+    }
+
+    public static String getBotPrefix() {
+        return BotPrefix;
+    }
+
+    public static void setBotPrefix(String botPrefix) {
+        BotPrefix = botPrefix;
+    }
+
     private static String finalLocation = null;
 
     private static String BotToken;
+    private static String BotPrefix;
+    private static String ChannelID;
 }

@@ -4,6 +4,7 @@ import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import Commands.prefix;
 
 public class Commander extends ListenerAdapter {
     // Making the slash command
@@ -27,12 +28,12 @@ public class Commander extends ListenerAdapter {
         // Me, myself and I
         slash.setOwnerId("623189902510522373");
         // Prefix of the bot
-        slash.setPrefix("//");
+        slash.setPrefix(DatabaseParameters.getBotPrefix());
         // Help thingy
         slash.setHelpWord("help");
 
         // Commands here!!
-
+        slash.addCommand(new prefix(jda));
         commands = slash.build();
         jda.addEventListener(commands);
     }

@@ -4,8 +4,13 @@ import java.sql.*;
 
 public class DatabaseHandles {
 
+    public static void FunctionRefresh() {
+        // TODO
+    }
+
     public void initStatus() { // Method that will load all values of Database into the bot
         DatabaseParameters.setBotToken(getConfigValue("Token"));
+        DatabaseParameters.setChannelID(getConfigValue("Channel"));
     }
 
 
