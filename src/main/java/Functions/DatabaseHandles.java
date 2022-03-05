@@ -4,12 +4,27 @@ import java.sql.*;
 
 public class DatabaseHandles {
 
+    public static void FunctionRefresh() {
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
+            Statement statement = connection.createStatement()){
+            // statement.execute("UPDATE Config SET Value = 'true' WHERE Function = 'ChatCalculateEnabled'");
+
+            // Calculate
+            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getBotPrefix() + "' WHERE Function = 'Prefix'");
+            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getChannelID() + "' WHERE Function = 'Channel'");
+        } catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
+    }
+
     public void initStatus() { // Method that will load all values of Database into the bot
-        DatabaseParameters.setBotToken(getValue("Token"));
+        DatabaseParameters.setBotToken(getConfigValue("Token"));
+        DatabaseParameters.setChannelID(getConfigValue("Channel"));
+        DatabaseParameters.setBotPrefix((getConfigValue("Prefix")));
     }
 
 
-    private String getValue(String function){
+    private String getConfigValue(String function){
         // Method that will access the database in read manner because
         // manners are very important here
         String Value = "";
@@ -29,5 +44,40 @@ public class DatabaseHandles {
             System.out.println(e.getErrorCode() + " " + e.getMessage());
         }
         return Value ;
+    }
+
+    public void writeActivity(String Date, String Time, String Name, String Activity, String ActivityReason){
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
+            Statement statement = connection.createStatement()){
+
+            statement.execute("INSERT INTO Activity (Date, Time, Name, Activity, Reason) " +
+                    "VALUES ('" + Date + "', '" + Time + "', '" + Name + "', '" + Activity + "', '" + ActivityReason + "')");
+
+        }
+
+        catch (SQLException sqlException){
+            System.out.println("Something happened! " + sqlException.getMessage());
+        }
+    }
+
+    // Will see if user exist in UserDatabase otherwise, would return error
+    public String findUser (String ID){
+        try {
+            try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
+                 Statement statement = connection.createStatement()) {
+
+                // function
+                statement.execute("SELECT * FROM Users WHERE DiscordID = '" + ID +"'");
+                try (ResultSet resultSet = statement.getResultSet()) {
+                    while(resultSet.next()){
+                        return resultSet.getString("FullName");
+                    }
+
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode() + " " + e.getMessage());
+        }
+         return "";
     }
 }

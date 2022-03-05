@@ -9,6 +9,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.security.auth.login.LoginException;
 
+import static Functions.Commander.commander;
+
 public class MainActivity implements EventListener {
     public static void main(String[] args) throws LoginException, InterruptedException {
 
@@ -35,6 +37,10 @@ public class MainActivity implements EventListener {
 
         // optionally block until JDA is ready
         jda.awaitReady();
+
+        // Calling your name again, remembering all the love you gave to me. Or how i used to be
+        commander(jda);
+
     }
 
     @Override
