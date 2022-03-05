@@ -41,7 +41,6 @@ public class MainActivity implements EventListener {
         // Calling your name again, remembering all the love you gave to me. Or how i used to be
         commander(jda);
 
-
     }
 
     @Override
