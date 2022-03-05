@@ -38,6 +38,7 @@ public class Commander extends ListenerAdapter {
         slash.addCommand(new prefix(jda));
         slash.addCommand(new channel());
         slash.addCommand(new Commands.in());
+        slash.addCommand(new Commands.out());
 
         commands = slash.build();
 
