@@ -34,6 +34,10 @@ public class Commander extends ListenerAdapter {
 
         // Commands here!!
         slash.addCommand(new prefix(jda));
+
+
+
+
         commands = slash.build();
         jda.addEventListener(commands);
     }

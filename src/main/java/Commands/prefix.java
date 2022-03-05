@@ -20,7 +20,8 @@ public class prefix extends Command {
     }
     @Override
     protected void execute(CommandEvent e){
-        if(!e.getChannel().toString().equals(DatabaseParameters.getChannelID())){
+        if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
+            e.getMessage().delete().queue();
             return;
         }
 

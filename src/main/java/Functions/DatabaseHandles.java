@@ -5,12 +5,22 @@ import java.sql.*;
 public class DatabaseHandles {
 
     public static void FunctionRefresh() {
-        // TODO
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
+            Statement statement = connection.createStatement()){
+            // statement.execute("UPDATE Config SET Value = 'true' WHERE Function = 'ChatCalculateEnabled'");
+
+            // Calculate
+            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getBotPrefix() + "' WHERE Function = 'Prefix'");
+            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getChannelID() + "' WHERE Function = 'Channel'");
+        } catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
     }
 
     public void initStatus() { // Method that will load all values of Database into the bot
         DatabaseParameters.setBotToken(getConfigValue("Token"));
         DatabaseParameters.setChannelID(getConfigValue("Channel"));
+        DatabaseParameters.setBotPrefix((getConfigValue("Prefix")));
     }
 
 
