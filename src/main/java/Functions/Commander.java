@@ -1,5 +1,6 @@
 package Functions;
 
+import Commands.back;
 import Commands.channel;
 import Event.Watcher;
 import com.jagrosh.jdautilities.command.CommandClient;
@@ -39,6 +40,7 @@ public class Commander extends ListenerAdapter {
         slash.addCommand(new channel());
         slash.addCommand(new Commands.in());
         slash.addCommand(new Commands.out());
+        slash.addCommand(new back());
 
         commands = slash.build();
 

@@ -16,7 +16,6 @@ public class out extends Command {
 
     @Override
     protected void execute(CommandEvent e){
-
         DatabaseHandles io = new DatabaseHandles();
         if(io.findUser(e.getAuthor().getId()).equals("")){
             e.replyInDm("You are not allowed to do that!");
