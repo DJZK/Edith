@@ -69,15 +69,12 @@ public class DatabaseHandles {
                 // function
                 statement.execute("SELECT * FROM Users WHERE DiscordID = '" + ID +"'");
                 try (ResultSet resultSet = statement.getResultSet()) {
-                    while (resultSet.next()) {
-
-                        return resultSet.getString("FullName");
-                    }
+                    return resultSet.getString("FullName");
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode() + " " + e.getMessage());
         }
-        return null;
+         return "";
     }
 }
