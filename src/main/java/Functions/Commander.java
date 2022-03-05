@@ -1,5 +1,7 @@
 package Functions;
 
+import Commands.channel;
+import Event.Watcher;
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import net.dv8tion.jda.api.JDA;
@@ -34,11 +36,13 @@ public class Commander extends ListenerAdapter {
 
         // Commands here!!
         slash.addCommand(new prefix(jda));
-
-
-
+        slash.addCommand(new channel());
 
         commands = slash.build();
+
+        // Events
         jda.addEventListener(commands);
+        jda.addEventListener(new Watcher());
+
     }
 }
