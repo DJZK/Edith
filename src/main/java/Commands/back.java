@@ -31,7 +31,7 @@ public class back extends Command {
             return;
         }
 
-        io.writeActivity(TimeThread.getDate(), TimeThread.getDate(), io.findUser(e.getAuthor().getId()), "Re-entry", "");
+        io.writeActivity(TimeThread.getDate(), TimeThread.getDate(), io.findUser(e.getAuthor().getId()), "Got back from break!", "");
         e.reply(io.findUser(e.getAuthor().getId()) + " got back from break: " + TimeThread.getDate() + " - " + TimeThread.getTime());
     }
 }
