@@ -12,15 +12,16 @@ public class DatabaseParameters {
             // Database Locations
             {
                     // Relative
-                    "Attendance.db"
+                    "Attendance.db",
+                    "C:\\Database\\Attendance.db"
             },
             // Database Names
             {
-                    "in the same place as executable"
+                    "in the same place as executable",
+                    "in Windows machine (Dev Mode)"
             }
     };
 
-    private static String finalLocation = null;
 
     public static void initDB() {
         // Will Cycle through available database, first found, first served
@@ -39,9 +40,19 @@ public class DatabaseParameters {
         finalLocation = database;
     }
 
-    // Getting the final found location of the database
     public static String getFinalLocation() {
         return finalLocation;
     }
 
+    public static String getBotToken() {
+        return BotToken;
+    }
+
+    public static void setBotToken(String botToken) {
+        BotToken = botToken;
+    }
+
+    private static String finalLocation = null;
+
+    private static String BotToken;
 }
