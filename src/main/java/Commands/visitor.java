@@ -40,7 +40,7 @@ public class visitor extends Command {
             return;
         }
 
-        io.writeActivity(TimeThread.getDate(), TimeThread.getDate(), io.findUser(e.getAuthor().getId()), "Visitor",  message[1]);
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(e.getAuthor().getId()), "Visitor",  message[1]);
         e.reply(io.findUser(e.getAuthor().getId()) + " recorded a visitor at: " + TimeThread.getDate() + " - " + TimeThread.getTime() + "\ndetails: " + message[1] );
     }
 }

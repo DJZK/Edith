@@ -45,7 +45,7 @@ public class in extends Command {
             e.reply("From where? Where are you working from...??");
             return;
         }
-        io.writeActivity(TimeThread.getDate(), TimeThread.getDate(), io.findUser(e.getAuthor().getId()), "Logged in", "from " + message[1]);
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(e.getAuthor().getId()), "Logged in", "from " + message[1]);
         e.reply(io.findUser(e.getAuthor().getId()) + " logged in: " + TimeThread.getDate() + " - " + TimeThread.getTime() + " from " + message[1] );
     }
 }

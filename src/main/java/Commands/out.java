@@ -32,7 +32,7 @@ public class out extends Command {
             return;
         }
 
-        io.writeActivity(TimeThread.getDate(), TimeThread.getDate(), io.findUser(e.getAuthor().getId()), "Logged Out", "");
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(e.getAuthor().getId()), "Logged Out", "");
         e.reply(io.findUser(e.getAuthor().getId()) + " logged out: " + TimeThread.getDate() + " - " + TimeThread.getTime());
     }
 }

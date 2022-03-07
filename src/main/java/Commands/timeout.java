@@ -41,7 +41,7 @@ public class timeout extends Command {
             return;
         }
 
-        io.writeActivity(TimeThread.getDate(), TimeThread.getDate(), io.findUser(e.getAuthor().getId()), "Went out", "reason: " + message[1]);
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(e.getAuthor().getId()), "Went out", "reason: " + message[1]);
         e.reply(io.findUser(e.getAuthor().getId()) + " took a break: " + TimeThread.getDate() + " - " + TimeThread.getTime() + " for a reason: " + message[1] );
     }
 
