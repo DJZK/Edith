@@ -41,6 +41,7 @@ public class Commander extends ListenerAdapter {
         slash.addCommand(new back());
         slash.addCommand(new timeout());
         slash.addCommand(new visitor());
+        slash.addCommand(new shutdown());
 
         commands = slash.build();
 
