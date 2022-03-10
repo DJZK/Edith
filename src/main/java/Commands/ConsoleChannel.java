@@ -27,7 +27,7 @@ public class ConsoleChannel extends Command {
         } else if (message.length == 2) {
             DatabaseParameters.setConsoleChannel(message[1]);
             DatabaseHandles.FunctionRefresh();
-            e.reply("My target channel for console was set to: <#" + DatabaseParameters.getChannelID() + ">");
+            e.reply("My target channel for console was set to: <#" + DatabaseParameters.getConsoleChannel() + ">");
 
         }
     }
