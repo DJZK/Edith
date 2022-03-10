@@ -70,9 +70,27 @@ public class DatabaseParameters {
         BotPrefix = botPrefix;
     }
 
+    public static String getSudoPass() {
+        return SudoPass;
+    }
+
+    public static void setSudoPass(String sudoPass) {
+        SudoPass = sudoPass;
+    }
+
+    public static String getConsoleChannel() {
+        return ConsoleChannel;
+    }
+
+    public static void setConsoleChannel(String consoleChannel) {
+        ConsoleChannel = consoleChannel;
+    }
+
     private static String finalLocation = null;
 
     private static String BotToken;
     private static String BotPrefix;
+    private static String SudoPass;
+    private static String ConsoleChannel;
     private static String ChannelID;
 }
