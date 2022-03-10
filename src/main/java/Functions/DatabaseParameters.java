@@ -13,12 +13,14 @@ public class DatabaseParameters {
             {
                     // Relative
                     "Attendance.db",
-                    "C:\\Database\\Attendance.db"
+                    "C:\\Database\\Attendance.db",
+                    "/home/djzk/Discord/Attendance.db"
             },
             // Database Names
             {
                     "in the same place as executable",
-                    "in Windows machine (Dev Mode)"
+                    "in Windows machine (Dev Mode)",
+                    "in Linux Machine! (Super Dev Mode!)"
             }
     };
 
