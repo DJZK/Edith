@@ -12,6 +12,8 @@ public class DatabaseHandles {
             // Calculate
             statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getBotPrefix() + "' WHERE Function = 'Prefix'");
             statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getChannelID() + "' WHERE Function = 'Channel'");
+            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getConsoleChannel() + "' WHERE Function = 'ConsoleChannel'");
+            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getSudoPass() + "' WHERE Function = 'ConsolePass'");
         } catch (SQLException sqlException){
             sqlException.printStackTrace();
         }
@@ -21,6 +23,8 @@ public class DatabaseHandles {
         DatabaseParameters.setBotToken(getConfigValue("Token"));
         DatabaseParameters.setChannelID(getConfigValue("Channel"));
         DatabaseParameters.setBotPrefix((getConfigValue("Prefix")));
+        DatabaseParameters.setSudoPass((getConfigValue("ConsolePass")));
+        DatabaseParameters.setConsoleChannel((getConfigValue("ConsoleChannel")));
     }
 
 

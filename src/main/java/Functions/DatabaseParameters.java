@@ -13,12 +13,14 @@ public class DatabaseParameters {
             {
                     // Relative
                     "Attendance.db",
-                    "C:\\Database\\Attendance.db"
+                    "C:\\Database\\Attendance.db",
+                    "/home/djzk/Discord/Attendance.db"
             },
             // Database Names
             {
                     "in the same place as executable",
-                    "in Windows machine (Dev Mode)"
+                    "in Windows machine (Dev Mode)",
+                    "in Linux Machine! (Super Dev Mode!)"
             }
     };
 
@@ -68,9 +70,27 @@ public class DatabaseParameters {
         BotPrefix = botPrefix;
     }
 
+    public static String getSudoPass() {
+        return SudoPass;
+    }
+
+    public static void setSudoPass(String sudoPass) {
+        SudoPass = sudoPass;
+    }
+
+    public static String getConsoleChannel() {
+        return ConsoleChannel;
+    }
+
+    public static void setConsoleChannel(String consoleChannel) {
+        ConsoleChannel = consoleChannel;
+    }
+
     private static String finalLocation = null;
 
     private static String BotToken;
     private static String BotPrefix;
+    private static String SudoPass;
+    private static String ConsoleChannel;
     private static String ChannelID;
 }

@@ -42,12 +42,15 @@ public class Commander extends ListenerAdapter {
         slash.addCommand(new timeout());
         slash.addCommand(new visitor());
         slash.addCommand(new shutdown());
+        slash.addCommand(new SudoPass());
+        slash.addCommand(new ConsoleChannel());
 
         commands = slash.build();
 
         // Events
         jda.addEventListener(commands);
         jda.addEventListener(new Watcher());
+        jda.addEventListener(new ConsoleEvent());
 
     }
 }
