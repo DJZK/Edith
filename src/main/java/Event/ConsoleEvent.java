@@ -1,4 +1,4 @@
-package Commands;
+package Event;
 
 import Functions.DatabaseParameters;
 import net.dv8tion.jda.api.Permission;

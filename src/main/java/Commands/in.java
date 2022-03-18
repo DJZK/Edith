@@ -44,16 +44,19 @@ public class in extends Command {
             return;
         }
 
+        // No location
         if(!(message[1].equalsIgnoreCase("site") || message[1].equalsIgnoreCase("remote"))){
             e.reply("From where? Where are you working from...??");
             return;
         }
 
+        // Still logged on
         if(io.actionEligibility(ID)[0]){
             e.reply("You're still logged on " + e.getAuthor().getAsMention());
             return;
         }
 
+        // Actions
         io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged in", "from " + message[1]);
         io.updateEligibility(ID, 'A');
         e.reply(io.findUser(ID) + " logged in: " + TimeThread.getDate() + " - " + TimeThread.getTime() + " from " + message[1] );

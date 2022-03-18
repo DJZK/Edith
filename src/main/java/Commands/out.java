@@ -42,11 +42,13 @@ public class out extends Command {
             return;
         }
 
-        // Not on Break
+        // Still on break
         if(io.actionEligibility(ID)[1]){
             e.reply("You're still on break and you wanna log out now " + e.getAuthor().getAsMention() +"?? the audacity...");
             return;
         }
+
+        // Actions
         io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged Out", "");
         io.updateEligibility(ID, 'A');
         e.reply(io.findUser(ID) + " logged out: " + TimeThread.getDate() + " - " + TimeThread.getTime());

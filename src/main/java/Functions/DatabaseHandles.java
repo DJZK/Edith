@@ -110,6 +110,11 @@ public class DatabaseHandles {
         return new boolean[]{false, false};
     }
 
+    /**
+     * Flips the boolean value of the current action eligibility
+     * @param ID user ID
+     * @param Function A = LoggedOn, B = OnBreak
+     */
     public void updateEligibility(String ID, char Function){
         try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
             Statement statement = connection.createStatement()){
@@ -122,7 +127,6 @@ public class DatabaseHandles {
                     break;
                 case 'B':
                     statement.execute("UPDATE Users SET OnBreak = '" + !actionEligibility(ID)[1]  + "' WHERE DiscordID = '" + ID + "'");
-
             }
 
 
