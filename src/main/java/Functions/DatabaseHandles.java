@@ -85,6 +85,11 @@ public class DatabaseHandles {
          return "";
     }
 
+    /**
+     *
+     * @param ID user ID
+     * @return LoggedOn, OnBreak
+     */
     public boolean[] actionEligibility(String ID){
         try {
             try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
@@ -103,5 +108,26 @@ public class DatabaseHandles {
             System.out.println(e.getErrorCode() + " " + e.getMessage());
         }
         return new boolean[]{false, false};
+    }
+
+    public void updateEligibility(String ID, char Function){
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
+            Statement statement = connection.createStatement()){
+            // statement.execute("UPDATE Config SET Value = 'true' WHERE Function = 'ChatCalculateEnabled'");
+
+            // Flips the boolean
+            switch (Function){
+                case 'L':
+                    statement.execute("UPDATE Users SET LoggedOn = '" + !actionEligibility(ID)[0]  + "' WHERE DiscordID = '" + ID + "'");
+                    break;
+                case 'O':
+                    statement.execute("UPDATE Users SET OnBreak = '" + !actionEligibility(ID)[1]  + "' WHERE DiscordID = '" + ID + "'");
+
+            }
+
+
+        } catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
     }
 }
