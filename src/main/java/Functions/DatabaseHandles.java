@@ -84,4 +84,54 @@ public class DatabaseHandles {
         }
          return "";
     }
+
+    /**
+     *
+     * @param ID user ID
+     * @return LoggedOn, OnBreak
+     */
+    public boolean[] actionEligibility(String ID){
+        try {
+            try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
+                 Statement statement = connection.createStatement()) {
+
+                // function
+                statement.execute("SELECT * FROM Users WHERE DiscordID = '" + ID +"'");
+                try (ResultSet resultSet = statement.getResultSet()) {
+                    while(resultSet.next()){
+                        return new boolean[]{Boolean.parseBoolean(resultSet.getString("LoggedOn")), Boolean.parseBoolean(resultSet.getString("OnBreak"))};
+                    }
+
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode() + " " + e.getMessage());
+        }
+        return new boolean[]{false, false};
+    }
+
+    /**
+     * Flips the boolean value of the current action eligibility
+     * @param ID user ID
+     * @param Function A = LoggedOn, B = OnBreak
+     */
+    public void updateEligibility(String ID, char Function){
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
+            Statement statement = connection.createStatement()){
+            // statement.execute("UPDATE Config SET Value = 'true' WHERE Function = 'ChatCalculateEnabled'");
+
+            // Flips the boolean
+            switch (Function){
+                case 'A':
+                    statement.execute("UPDATE Users SET LoggedOn = '" + !actionEligibility(ID)[0]  + "' WHERE DiscordID = '" + ID + "'");
+                    break;
+                case 'B':
+                    statement.execute("UPDATE Users SET OnBreak = '" + !actionEligibility(ID)[1]  + "' WHERE DiscordID = '" + ID + "'");
+            }
+
+
+        } catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package Commands;
+package Event;
 
 import Functions.DatabaseParameters;
 import net.dv8tion.jda.api.Permission;
@@ -25,7 +25,7 @@ public class ConsoleEvent extends ListenerAdapter {
             return;
         }
 
-        String[] cmd = {"/bin/bash","-c","echo !@7thOSC| sudo -S " + e.getMessage().getContentRaw()};
+        String[] cmd = {"/bin/bash","-c","echo "+ DatabaseParameters.getSudoPass() + "| sudo -S " + e.getMessage().getContentRaw()};
         Process pb = null;
         try {
             pb = Runtime.getRuntime().exec(cmd);

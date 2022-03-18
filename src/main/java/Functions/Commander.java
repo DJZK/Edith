@@ -1,6 +1,7 @@
 package Functions;
 
 import Commands.*;
+import Event.ConsoleEvent;
 import Event.Watcher;
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;

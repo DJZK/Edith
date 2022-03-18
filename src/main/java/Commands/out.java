@@ -18,6 +18,9 @@ public class out extends Command {
     @Override
     protected void execute(CommandEvent e){
         DatabaseHandles io = new DatabaseHandles();
+        String ID = e.getAuthor().getId();
+
+        // Not part of team
         if(io.findUser(e.getAuthor().getId()).equals("")){
             e.replyInDm("You are not allowed to do that!");
             if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
@@ -26,13 +29,28 @@ public class out extends Command {
             return;
         }
 
+        // Not in the designated channel
         if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
             e.getMessage().delete().queue();
             e.getJDA().getTextChannelById(DatabaseParameters.getChannelID()).sendMessage("Do that here! " + e.getAuthor().getAsMention()).queue();
             return;
         }
 
-        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(e.getAuthor().getId()), "Logged Out", "");
-        e.reply(io.findUser(e.getAuthor().getId()) + " logged out: " + TimeThread.getDate() + " - " + TimeThread.getTime());
+        // not logged on
+        if(!io.actionEligibility(ID)[0]){
+            e.reply("You're not even logged on lol " + e.getAuthor().getAsMention());
+            return;
+        }
+
+        // Still on break
+        if(io.actionEligibility(ID)[1]){
+            e.reply("You're still on break and you wanna log out now " + e.getAuthor().getAsMention() +"?? the audacity...");
+            return;
+        }
+
+        // Actions
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged Out", "");
+        io.updateEligibility(ID, 'A');
+        e.reply(io.findUser(ID) + " logged out: " + TimeThread.getDate() + " - " + TimeThread.getTime());
     }
 }

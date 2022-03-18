@@ -17,8 +17,10 @@ public class in extends Command {
 
     @Override
     protected void execute(CommandEvent e){
-
         DatabaseHandles io = new DatabaseHandles();
+        String ID = e.getAuthor().getId();
+
+        // Not part of team
         if(io.findUser(e.getAuthor().getId()).equals("")){
             e.replyInDm("You are not allowed to do that!");
             if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
@@ -27,6 +29,7 @@ public class in extends Command {
             return;
         }
 
+        // Not in the designated channel
         if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
             e.getMessage().delete().queue();
             e.getJDA().getTextChannelById(DatabaseParameters.getChannelID()).sendMessage("Do that here! " + e.getAuthor().getAsMention()).queue();
@@ -41,11 +44,21 @@ public class in extends Command {
             return;
         }
 
+        // No location
         if(!(message[1].equalsIgnoreCase("site") || message[1].equalsIgnoreCase("remote"))){
             e.reply("From where? Where are you working from...??");
             return;
         }
-        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(e.getAuthor().getId()), "Logged in", "from " + message[1]);
-        e.reply(io.findUser(e.getAuthor().getId()) + " logged in: " + TimeThread.getDate() + " - " + TimeThread.getTime() + " from " + message[1] );
+
+        // Still logged on
+        if(io.actionEligibility(ID)[0]){
+            e.reply("You're still logged on " + e.getAuthor().getAsMention());
+            return;
+        }
+
+        // Actions
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged in", "from " + message[1]);
+        io.updateEligibility(ID, 'A');
+        e.reply(io.findUser(ID) + " logged in: " + TimeThread.getDate() + " - " + TimeThread.getTime() + " from " + message[1] );
     }
 }
