@@ -84,4 +84,24 @@ public class DatabaseHandles {
         }
          return "";
     }
+
+    public boolean[] actionEligibility(String ID){
+        try {
+            try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
+                 Statement statement = connection.createStatement()) {
+
+                // function
+                statement.execute("SELECT * FROM Users WHERE DiscordID = '" + ID +"'");
+                try (ResultSet resultSet = statement.getResultSet()) {
+                    while(resultSet.next()){
+                        return new boolean[]{Boolean.parseBoolean(resultSet.getString("LoggedOn")), Boolean.parseBoolean(resultSet.getString("OnBreak"))};
+                    }
+
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode() + " " + e.getMessage());
+        }
+        return new boolean[]{false, false};
+    }
 }
