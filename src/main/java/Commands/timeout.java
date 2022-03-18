@@ -51,7 +51,7 @@ public class timeout extends Command {
         }
 
         // already on break
-        if(!io.actionEligibility(ID)[1]){
+        if(io.actionEligibility(ID)[1]){
             e.reply("You're already on break and you wanna take another one? What are you planning to do " + e.getAuthor().getAsMention() + "?");
             return;
         }
