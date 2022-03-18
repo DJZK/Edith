@@ -38,7 +38,7 @@ public class back extends Command {
 
         // Not Logged On
         if(!io.actionEligibility(ID)[0]){
-            e.reply("You haven't even logged on lol " + e.getAuthor().getAsMention());
+            e.reply("You're not even logged on lol " + e.getAuthor().getAsMention());
             return;
         }
 
