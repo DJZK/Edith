@@ -117,10 +117,10 @@ public class DatabaseHandles {
 
             // Flips the boolean
             switch (Function){
-                case 'L':
+                case 'A':
                     statement.execute("UPDATE Users SET LoggedOn = '" + !actionEligibility(ID)[0]  + "' WHERE DiscordID = '" + ID + "'");
                     break;
-                case 'O':
+                case 'B':
                     statement.execute("UPDATE Users SET OnBreak = '" + !actionEligibility(ID)[1]  + "' WHERE DiscordID = '" + ID + "'");
 
             }
