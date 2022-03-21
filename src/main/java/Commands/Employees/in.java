@@ -76,8 +76,6 @@ public class in extends Command {
         }
 
 
-
-
         // Actions
         io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged in", "from " + message[1]);
         io.updateEligibility(ID, 'A');
