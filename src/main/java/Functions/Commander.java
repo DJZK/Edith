@@ -49,6 +49,7 @@ public class Commander extends ListenerAdapter {
         slash.addCommand(new Shutdown());
         slash.addCommand(new SudoPass());
         slash.addCommand(new ConsoleChannel());
+        slash.addCommand(new GuildID());
 
         commands = slash.build();
 
