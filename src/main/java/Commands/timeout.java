@@ -6,6 +6,9 @@ import Functions.TimeThread;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class timeout extends Command {
     public timeout(){
         this.name = "break";
@@ -56,9 +59,27 @@ public class timeout extends Command {
             return;
         }
 
+        if(!(TimeThread.getNumericalTime('b').equals("10") || TimeThread.getNumericalTime('b').equals(15))){
+            e.reply("It's still not allowed to take a break!");
+            return;
+        }
+
         io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Went out", "reason: " + message[1]);
         io.updateEligibility(ID, 'B');
         e.reply(io.findUser(ID) + " took a break: " + TimeThread.getDate() + " - " + TimeThread.getTime() + " for a reason: " + message[1] );
+
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                e.reply("Time out "+ e.getAuthor().getAsMention());
+                io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Got back from break!", "");
+                io.updateEligibility(ID, 'B');
+
+                t.cancel();
+                t.purge();
+            }
+        },1000, 1000);
     }
 
 

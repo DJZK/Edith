@@ -39,7 +39,7 @@ public class Commander extends ListenerAdapter {
         slash.addCommand(new channel());
         slash.addCommand(new Commands.in());
         slash.addCommand(new Commands.out());
-        slash.addCommand(new back());
+        // slash.addCommand(new back());
         slash.addCommand(new timeout());
         slash.addCommand(new visitor());
         slash.addCommand(new shutdown());

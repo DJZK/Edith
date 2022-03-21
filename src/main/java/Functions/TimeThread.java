@@ -3,6 +3,8 @@ package Functions;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TimeThread {
     /**
@@ -38,6 +40,24 @@ public class TimeThread {
         DateFormat toTime = new SimpleDateFormat("M/dd/yyyy");
         Date date = new Date();
         return toTime.format(date);
+    }
+
+
+    // For the realtime clock
+    public void realtime(){
+        Timer t = new Timer();
+
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                // Timed task here
+                System.out.println("this is a test");
+
+                // Canceler
+                // t.cancel();
+                // t.purge();
+            }
+        },60000,60000);
     }
 
 }

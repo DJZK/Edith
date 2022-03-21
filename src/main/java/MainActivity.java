@@ -16,6 +16,7 @@ public class MainActivity implements EventListener {
     public static void main(String[] args) throws LoginException, InterruptedException {
         
         DatabaseHandles db = new DatabaseHandles();
+        TimeThread td = new TimeThread();
 
         // Will find the database
         DatabaseParameters.initDB();
@@ -41,6 +42,8 @@ public class MainActivity implements EventListener {
 
         // Calling your name again, remembering all the love you gave to me. Or how i used to be
         commander(jda);
+
+        td.realtime();
 
     }
 
