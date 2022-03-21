@@ -56,6 +56,22 @@ public class in extends Command {
             return;
         }
 
+        // Not allowed up to 8:30 AM
+        if(TimeThread.getNumericalTime('b').equals("08")){
+            if(Integer.parseInt(TimeThread.getNumericalTime('a')) > 830) {
+                e.reply("Too late my guy.. too late..");
+                return;
+            }
+        }
+
+        // Not allowed up to 1:30 PM
+        if(TimeThread.getNumericalTime('b').equals("13")){
+            if(Integer.parseInt(TimeThread.getNumericalTime('a')) > 1330) {
+                e.reply("Too late my guy.. too late..");
+                return;
+            }
+        }
+
         // Actions
         io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged in", "from " + message[1]);
         io.updateEligibility(ID, 'A');
