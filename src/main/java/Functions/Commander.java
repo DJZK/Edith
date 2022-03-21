@@ -39,14 +39,14 @@ public class Commander extends ListenerAdapter {
         slash.setHelpWord("help");
 
         // Commands here!!
-        slash.addCommand(new prefix(jda));
-        slash.addCommand(new channel());
+        slash.addCommand(new Prefix(jda));
+        slash.addCommand(new CommandChannel());
         slash.addCommand(new in());
         slash.addCommand(new out());
         // slash.addCommand(new back());
         slash.addCommand(new timeout());
         slash.addCommand(new visitor());
-        slash.addCommand(new shutdown());
+        slash.addCommand(new Shutdown());
         slash.addCommand(new SudoPass());
         slash.addCommand(new ConsoleChannel());
 
