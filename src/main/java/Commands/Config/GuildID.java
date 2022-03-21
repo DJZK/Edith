@@ -7,7 +7,7 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 import net.dv8tion.jda.api.Permission;
 
 public class GuildID extends Command {
-    public void GuildID(){
+    public GuildID(){
         this.name = "guildid";
         this.aliases = new String[] {"guid", "serverid", "servid"};
         this.userPermissions = new Permission[]{Permission.ADMINISTRATOR};
