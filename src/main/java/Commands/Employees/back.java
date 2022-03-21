@@ -1,4 +1,4 @@
-package Commands;
+package Commands.Employees;
 
 import Functions.DatabaseHandles;
 import Functions.DatabaseParameters;
@@ -6,11 +6,11 @@ import Functions.TimeThread;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
-public class out extends Command {
-    public out(){
-        this.name = "out";
-        this.aliases = new String []{"logout", "bounce", "signout"};
-        this.help = "logs you out!";
+public class back extends Command {
+    public back(){
+        this.name = "back";
+        this.aliases = new String []{"reentry", "relog"};
+        this.help = "logs you back in from break!";
         this.guildOnly = true;
         this.hidden = false;
     }
@@ -21,7 +21,7 @@ public class out extends Command {
         String ID = e.getAuthor().getId();
 
         // Not part of team
-        if(io.findUser(e.getAuthor().getId()).equals("")){
+        if(io.findUser(ID).equals("")){
             e.replyInDm("You are not allowed to do that!");
             if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
                 e.getMessage().delete().queue();
@@ -36,21 +36,21 @@ public class out extends Command {
             return;
         }
 
-        // not logged on
+        // Not Logged On
         if(!io.actionEligibility(ID)[0]){
             e.reply("You're not even logged on lol " + e.getAuthor().getAsMention());
             return;
         }
 
-        // Still on break
-        if(io.actionEligibility(ID)[1]){
-            e.reply("You're still on break and you wanna log out now " + e.getAuthor().getAsMention() +"?? the audacity...");
+        // Not on Break
+        if(!io.actionEligibility(ID)[1]){
+            e.reply("You're not on break " + e.getAuthor().getAsMention());
             return;
         }
 
         // Actions
-        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged Out", "");
-        io.updateEligibility(ID, 'A');
-        e.reply(io.findUser(ID) + " logged out: " + TimeThread.getDate() + " - " + TimeThread.getTime());
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Got back from break!", "");
+        io.updateEligibility(ID, 'B');
+        e.reply(io.findUser(ID) + " got back from break: " + TimeThread.getDate() + " - " + TimeThread.getTime());
     }
 }

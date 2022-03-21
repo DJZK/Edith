@@ -1,6 +1,10 @@
 package Functions;
 
-import Commands.*;
+import Commands.Config.*;
+import Commands.Employees.in;
+import Commands.Employees.out;
+import Commands.Employees.timeout;
+import Commands.Employees.visitor;
 import Event.ConsoleEvent;
 import Event.Watcher;
 import com.jagrosh.jdautilities.command.CommandClient;
@@ -37,8 +41,8 @@ public class Commander extends ListenerAdapter {
         // Commands here!!
         slash.addCommand(new prefix(jda));
         slash.addCommand(new channel());
-        slash.addCommand(new Commands.in());
-        slash.addCommand(new Commands.out());
+        slash.addCommand(new in());
+        slash.addCommand(new out());
         // slash.addCommand(new back());
         slash.addCommand(new timeout());
         slash.addCommand(new visitor());

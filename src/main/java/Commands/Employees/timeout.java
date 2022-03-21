@@ -1,4 +1,4 @@
-package Commands;
+package Commands.Employees;
 
 import Functions.DatabaseHandles;
 import Functions.DatabaseParameters;
@@ -59,7 +59,7 @@ public class timeout extends Command {
             return;
         }
 
-        if(!(TimeThread.getNumericalTime('b').equals("10") || TimeThread.getNumericalTime('b').equals(15))){
+        if(!(TimeThread.getNumericalTime('b').equals("10") || TimeThread.getNumericalTime('b').equals("15"))){
             e.reply("It's still not allowed to take a break!");
             return;
         }
@@ -79,7 +79,7 @@ public class timeout extends Command {
                 t.cancel();
                 t.purge();
             }
-        },1000, 1000);
+        },60000, 60000);
     }
 
 

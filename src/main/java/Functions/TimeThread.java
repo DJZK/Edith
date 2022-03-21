@@ -1,5 +1,7 @@
 package Functions;
 
+import net.dv8tion.jda.api.JDA;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,6 +9,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class TimeThread {
+    private final JDA api;
+
+    public TimeThread(JDA api) {
+        this.api = api;
+    }
+
     /**
      *
      * @return Formatted Time (Hour:Minute AM/PM)
@@ -50,12 +58,7 @@ public class TimeThread {
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                // Timed task here
-                System.out.println("this is a test");
-
-                // Canceler
-                // t.cancel();
-                // t.purge();
+                
             }
         },60000,60000);
     }

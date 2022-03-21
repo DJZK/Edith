@@ -1,4 +1,4 @@
-package Commands;
+package Commands.Employees;
 
 import Functions.DatabaseHandles;
 import Functions.DatabaseParameters;
@@ -6,11 +6,11 @@ import Functions.TimeThread;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
-public class in extends Command {
-    public in(){
-        this.name = "in";
-        this.aliases = new String []{"login", "logon", "signin"};
-        this.help = "logs you in!";
+public class visitor extends Command {
+    public visitor(){
+        this.name = "visitor";
+        this.aliases = new String []{"visit", "log"};
+        this.help = "visitor and their activity!";
         this.guildOnly = true;
         this.hidden = false;
     }
@@ -18,9 +18,6 @@ public class in extends Command {
     @Override
     protected void execute(CommandEvent e){
         DatabaseHandles io = new DatabaseHandles();
-        String ID = e.getAuthor().getId();
-
-        // Not part of team
         if(io.findUser(e.getAuthor().getId()).equals("")){
             e.replyInDm("You are not allowed to do that!");
             if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
@@ -29,7 +26,6 @@ public class in extends Command {
             return;
         }
 
-        // Not in the designated channel
         if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
             e.getMessage().delete().queue();
             e.getJDA().getTextChannelById(DatabaseParameters.getChannelID()).sendMessage("Do that here! " + e.getAuthor().getAsMention()).queue();
@@ -40,25 +36,11 @@ public class in extends Command {
 
         // Single command input
         if(message.length == 1){
-            e.reply(DatabaseParameters.getBotPrefix() + "in <site/remote> \nsite = from office \nremote = work from home... or wherever you are.");
+            e.reply(DatabaseParameters.getBotPrefix() + "visitor <who, and their activity>");
             return;
         }
 
-        // No location
-        if(!(message[1].equalsIgnoreCase("site") || message[1].equalsIgnoreCase("remote"))){
-            e.reply("From where? Where are you working from...??");
-            return;
-        }
-
-        // Still logged on
-        if(io.actionEligibility(ID)[0]){
-            e.reply("You're still logged on " + e.getAuthor().getAsMention());
-            return;
-        }
-
-        // Actions
-        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged in", "from " + message[1]);
-        io.updateEligibility(ID, 'A');
-        e.reply(io.findUser(ID) + " logged in: " + TimeThread.getDate() + " - " + TimeThread.getTime() + " from " + message[1] );
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(e.getAuthor().getId()), "Visitor",  message[1]);
+        e.reply(io.findUser(e.getAuthor().getId()) + " recorded a visitor at: " + TimeThread.getDate() + " - " + TimeThread.getTime() + "\ndetails: " + message[1] );
     }
 }

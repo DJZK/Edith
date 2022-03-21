@@ -1,4 +1,4 @@
-package Commands;
+package Commands.Employees;
 
 import Functions.DatabaseHandles;
 import Functions.DatabaseParameters;
@@ -6,11 +6,11 @@ import Functions.TimeThread;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
-public class visitor extends Command {
-    public visitor(){
-        this.name = "visitor";
-        this.aliases = new String []{"visit", "log"};
-        this.help = "visitor and their activity!";
+public class out extends Command {
+    public out(){
+        this.name = "out";
+        this.aliases = new String []{"logout", "bounce", "signout"};
+        this.help = "logs you out!";
         this.guildOnly = true;
         this.hidden = false;
     }
@@ -18,6 +18,9 @@ public class visitor extends Command {
     @Override
     protected void execute(CommandEvent e){
         DatabaseHandles io = new DatabaseHandles();
+        String ID = e.getAuthor().getId();
+
+        // Not part of team
         if(io.findUser(e.getAuthor().getId()).equals("")){
             e.replyInDm("You are not allowed to do that!");
             if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
@@ -26,21 +29,28 @@ public class visitor extends Command {
             return;
         }
 
+        // Not in the designated channel
         if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
             e.getMessage().delete().queue();
             e.getJDA().getTextChannelById(DatabaseParameters.getChannelID()).sendMessage("Do that here! " + e.getAuthor().getAsMention()).queue();
             return;
         }
 
-        String[] message = e.getMessage().getContentRaw().split(" ", 2);
-
-        // Single command input
-        if(message.length == 1){
-            e.reply(DatabaseParameters.getBotPrefix() + "visitor <who, and their activity>");
+        // not logged on
+        if(!io.actionEligibility(ID)[0]){
+            e.reply("You're not even logged on lol " + e.getAuthor().getAsMention());
             return;
         }
 
-        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(e.getAuthor().getId()), "Visitor",  message[1]);
-        e.reply(io.findUser(e.getAuthor().getId()) + " recorded a visitor at: " + TimeThread.getDate() + " - " + TimeThread.getTime() + "\ndetails: " + message[1] );
+        // Still on break
+        if(io.actionEligibility(ID)[1]){
+            e.reply("You're still on break and you wanna log out now " + e.getAuthor().getAsMention() +"?? the audacity...");
+            return;
+        }
+
+        // Actions
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged Out", "");
+        io.updateEligibility(ID, 'A');
+        e.reply(io.findUser(ID) + " logged out: " + TimeThread.getDate() + " - " + TimeThread.getTime());
     }
 }

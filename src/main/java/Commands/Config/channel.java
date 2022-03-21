@@ -1,4 +1,4 @@
-package Commands;
+package Commands.Config;
 
 import Functions.Commander;
 import Functions.DatabaseHandles;
