@@ -59,12 +59,38 @@ public class timeout extends Command {
             return;
         }
 
-        // Not allowed
+        // Not allowed up to 10:30 AM
         if(TimeThread.getNumericalTime('b').equals("10")){
-            if(TimeThread.getNumericalTime('a').equals("test"));
-            // TODO
-
+            if(Integer.parseInt(TimeThread.getNumericalTime('a')) > 1015) {
+                e.reply("Too late my guy.. too late..");
+                return;
+            }
         }
+
+        // Not allowed up to 3:15 PM
+        if(TimeThread.getNumericalTime('b').equals("15")){
+            if(Integer.parseInt(TimeThread.getNumericalTime('a')) > 1515) {
+                e.reply("Too late my guy.. too late..");
+                return;
+            }
+        }
+
+        // Not allowed 15mins before 12 PM
+        if(TimeThread.getNumericalTime('b').equals("11")){
+            if(Integer.parseInt(TimeThread.getNumericalTime('b')) > 1145){
+                e.reply("It's not allowed to take a break before lunch. Extending time eh? hahaha sneaky");
+            }
+            return;
+        }
+
+        // Not allowed 15mins before 5 PM
+        if(TimeThread.getNumericalTime('b').equals("16")){
+            if(Integer.parseInt(TimeThread.getNumericalTime('b')) > 1645){
+                e.reply("Nope. You're not gonna out early.. nope");
+            }
+            return;
+        }
+
 
         // Will Take A break
         io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Went out", "reason: " + message[1]);
