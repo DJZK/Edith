@@ -56,21 +56,26 @@ public class in extends Command {
             return;
         }
 
-
-        // Not allowed up to 8:30 AM
-
-            if(Integer.parseInt(TimeThread.getNumericalTime('a')) > 830) {
-                e.reply("You're ");
-                return;
-            }
+        // Not allowed to log in outside work hours
+        if (!(TimeThread.getNumericalTime('b').equals("8") || TimeThread.getNumericalTime('b').equals("13"))) {
+            e.reply("Not allowed to log in at this point. What are you doing?");
+            return;
+        }
 
 
-        // Not allowed up to 1:30 PM
+        // Not allowed to log in after 1:30 PM
+        if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 1330) {
+            e.reply("~~all the time but this is, 30 freaking minutes too late.... but i wish you enjoyed your lunch!");
+            return;
+        }
 
-            if(Integer.parseInt(TimeThread.getNumericalTime('a')) > 1330) {
-                e.reply("Too late my guy.. too late..");
-                return;
-            }
+        // Not allowed to log in after 8:30 AM
+        if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 830) {
+            e.reply("more than 30 minutes late in the morning? Seriously!?");
+            return;
+        }
+
+
 
 
         // Actions
