@@ -60,9 +60,10 @@ public class timeout extends Command {
         }
 
         // Not allowed
-        if(!(TimeThread.getNumericalTime('b').equals("10") || TimeThread.getNumericalTime('b').equals("15"))){
-            e.reply("It's still not allowed to take a break!");
-            return;
+        if(TimeThread.getNumericalTime('b').equals("10")){
+            if(TimeThread.getNumericalTime('a').equals("test"));
+            // TODO
+
         }
 
         // Will Take A break

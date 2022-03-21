@@ -63,9 +63,6 @@ public class TimeThread {
                 String TextChannelID = DatabaseParameters.getChannelID();
 
                 // Timed Task
-                if(NumTime == 1000){
-                }
-
                 switch (NumTime){
                     case 1000:
                         api.getGuildById(GuildID).getTextChannelById(TextChannelID).sendMessage("It's 10 AM @everyone. You might wanna take a break?").queue();
@@ -78,9 +75,6 @@ public class TimeThread {
                         break;
                     case 1300:
                         api.getGuildById(GuildID).getTextChannelById(TextChannelID).sendMessage("@everyone 1 PM mark. Time to get back!").queue();
-
-
-
 
                 }
 
