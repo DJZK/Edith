@@ -58,7 +58,32 @@ public class TimeThread {
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                
+                int NumTime = Integer.parseInt(getNumericalTime('a'));
+                String GuildID = DatabaseParameters.getGuildID();
+                String TextChannelID = DatabaseParameters.getChannelID();
+
+                // Timed Task
+                if(NumTime == 1000){
+                }
+
+                switch (NumTime){
+                    case 1000:
+                        api.getGuildById(GuildID).getTextChannelById(TextChannelID).sendMessage("It's 10 AM @everyone. You might wanna take a break?").queue();
+                        break;
+                    case 1500:
+                        api.getGuildById(GuildID).getTextChannelById(TextChannelID).sendMessage("It's 3 PM @everyone. Let's sip a coffee? only 15 minutes though.").queue();
+                        break;
+                    case 1200:
+                        api.getGuildById(GuildID).getTextChannelById(TextChannelID).sendMessage("It's 12 PM! Time to get out for lunch! @everyone").queue();
+                        break;
+                    case 1300:
+                        api.getGuildById(GuildID).getTextChannelById(TextChannelID).sendMessage("@everyone 1 PM mark. Time to get back!").queue();
+
+
+
+
+                }
+
             }
         },60000,60000);
     }

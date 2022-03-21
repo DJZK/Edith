@@ -59,15 +59,19 @@ public class timeout extends Command {
             return;
         }
 
+        // Not allowed
         if(!(TimeThread.getNumericalTime('b').equals("10") || TimeThread.getNumericalTime('b').equals("15"))){
             e.reply("It's still not allowed to take a break!");
             return;
         }
 
+        // Will Take A break
         io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Went out", "reason: " + message[1]);
         io.updateEligibility(ID, 'B');
         e.reply(io.findUser(ID) + " took a break: " + TimeThread.getDate() + " - " + TimeThread.getTime() + " for a reason: " + message[1] );
 
+
+        // Expires in 15minutes
         Timer t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -79,7 +83,7 @@ public class timeout extends Command {
                 t.cancel();
                 t.purge();
             }
-        },60000, 60000);
+        },900000, 900000);
     }
 
 
