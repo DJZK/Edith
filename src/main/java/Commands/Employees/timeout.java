@@ -48,13 +48,13 @@ public class timeout extends Command {
 //        }
 
         // Not Logged On
-        if (!io.actionEligibility(ID)[0]) {
+        if (!io.checkActionEligibility(ID)[0]) {
             e.reply("You're not even logged on lol " + e.getAuthor().getAsMention());
             return;
         }
 
         // already on break
-        if (io.actionEligibility(ID)[1]) {
+        if (io.checkActionEligibility(ID)[1]) {
             e.reply("You're already on break and you wanna take another one? What are you planning to do " + e.getAuthor().getAsMention() + "?");
             return;
         }

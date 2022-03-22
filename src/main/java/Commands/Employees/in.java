@@ -51,7 +51,7 @@ public class in extends Command {
         }
 
         // Still logged on
-        if(io.actionEligibility(ID)[0]){
+        if(io.checkActionEligibility(ID)[0]){
             e.reply("You're still logged on " + e.getAuthor().getAsMention());
             return;
         }

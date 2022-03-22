@@ -37,13 +37,13 @@ public class out extends Command {
         }
 
         // not logged on
-        if(!io.actionEligibility(ID)[0]){
+        if(!io.checkActionEligibility(ID)[0]){
             e.reply("You're not even logged on lol " + e.getAuthor().getAsMention());
             return;
         }
 
         // Still on break
-        if(io.actionEligibility(ID)[1]){
+        if(io.checkActionEligibility(ID)[1]){
             e.reply("You're still on break and you wanna log out now " + e.getAuthor().getAsMention() +"?? the audacity...");
             return;
         }
