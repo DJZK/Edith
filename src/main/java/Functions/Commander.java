@@ -1,10 +1,7 @@
 package Functions;
 
 import Commands.Config.*;
-import Commands.Employees.in;
-import Commands.Employees.out;
-import Commands.Employees.timeout;
-import Commands.Employees.visitor;
+import Commands.Employees.*;
 import Event.ConsoleEvent;
 import Event.Watcher;
 import com.jagrosh.jdautilities.command.CommandClient;
@@ -43,13 +40,13 @@ public class Commander extends ListenerAdapter {
         slash.addCommand(new CommandChannel());
         slash.addCommand(new in());
         slash.addCommand(new out());
-        // slash.addCommand(new back());
         slash.addCommand(new timeout());
         slash.addCommand(new visitor());
         slash.addCommand(new Shutdown());
         slash.addCommand(new SudoPass());
         slash.addCommand(new ConsoleChannel());
         slash.addCommand(new GuildID());
+        slash.addCommand(new overwrite());
 
         commands = slash.build();
 

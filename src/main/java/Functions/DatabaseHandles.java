@@ -53,6 +53,14 @@ public class DatabaseHandles {
         return Value ;
     }
 
+    /**
+     *
+     * @param Date The current date
+     * @param Time The current time
+     * @param Name Name of the doer
+     * @param Activity Their activity
+     * @param ActivityReason The reason for that activity
+     */
     public void writeActivity(String Date, String Time, String Name, String Activity, String ActivityReason){
         try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
             Statement statement = connection.createStatement()){
