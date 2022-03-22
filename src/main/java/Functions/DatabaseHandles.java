@@ -5,20 +5,11 @@ import java.sql.*;
 public class DatabaseHandles {
 
     public static void FunctionRefresh() {
-        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
-            Statement statement = connection.createStatement()){
-            // statement.execute("UPDATE Config SET Value = 'true' WHERE Function = 'ChatCalculateEnabled'");
-
-            // Calculate
-            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getBotPrefix() + "' WHERE Function = 'Prefix'");
-            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getChannelID() + "' WHERE Function = 'Channel'");
-            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getConsoleChannel() + "' WHERE Function = 'ConsoleChannel'");
-            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getSudoPass() + "' WHERE Function = 'ConsolePass'");
-            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getGuildID() + "' WHERE Function = 'GuildID'");
-
-        } catch (SQLException sqlException){
-            sqlException.printStackTrace();
-        }
+        setConfigValue(DatabaseParameters.getBotPrefix(), "Prefix");
+        setConfigValue(DatabaseParameters.getChannelID(), "Channel");
+        setConfigValue(DatabaseParameters.getConsoleChannel(),"ConsoleChannel");
+        setConfigValue(DatabaseParameters.getSudoPass(), "ConsolePass");
+        setConfigValue(DatabaseParameters.getGuildID(), "GuildID");
     }
 
     public void initStatus() { // Method that will load all values of Database into the bot
@@ -31,6 +22,18 @@ public class DatabaseHandles {
     }
 
 
+    private static void setConfigValue(String parameter, String function){
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
+            Statement statement = connection.createStatement()){
+            // statement.execute("UPDATE Config SET Value = 'true' WHERE Function = 'ChatCalculateEnabled'");
+
+            // Parameter update
+            statement.execute("UPDATE Config SET Parameter = '" + parameter + "' WHERE Function = '" + function + "'");
+
+        } catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
+    }
     private String getConfigValue(String function){
         // Method that will access the database in read manner because
         // manners are very important here
@@ -101,7 +104,7 @@ public class DatabaseHandles {
      * @param ID user ID
      * @return LoggedOn, OnBreak
      */
-    public boolean[] actionEligibility(String ID){
+    public boolean[] checkActionEligibility(String ID){
         try {
             try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
                  Statement statement = connection.createStatement()) {
@@ -134,10 +137,10 @@ public class DatabaseHandles {
             // Flips the boolean
             switch (Function){
                 case 'A':
-                    statement.execute("UPDATE Users SET LoggedOn = '" + !actionEligibility(ID)[0]  + "' WHERE DiscordID = '" + ID + "'");
+                    statement.execute("UPDATE Users SET LoggedOn = '" + !checkActionEligibility(ID)[0]  + "' WHERE DiscordID = '" + ID + "'");
                     break;
                 case 'B':
-                    statement.execute("UPDATE Users SET OnBreak = '" + !actionEligibility(ID)[1]  + "' WHERE DiscordID = '" + ID + "'");
+                    statement.execute("UPDATE Users SET OnBreak = '" + !checkActionEligibility(ID)[1]  + "' WHERE DiscordID = '" + ID + "'");
             }
 
 
