@@ -1,11 +1,11 @@
-package Commands;
+package Commands.Config;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import net.dv8tion.jda.api.Permission;
 
-public class shutdown extends Command {
-    public shutdown(){
+public class Shutdown extends Command {
+    public Shutdown(){
         this.userPermissions = new Permission[]{Permission.ADMINISTRATOR};
         this.name = "shutdown";
         this.help = "Shutdown the application";

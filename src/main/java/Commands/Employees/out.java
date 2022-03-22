@@ -1,4 +1,4 @@
-package Commands;
+package Commands.Employees;
 
 import Functions.DatabaseHandles;
 import Functions.DatabaseParameters;
@@ -48,9 +48,24 @@ public class out extends Command {
             return;
         }
 
+        // Not allowed to log in outside work hours
+        if (!(TimeThread.getNumericalTime('b').equals("12") || Integer.parseInt(TimeThread.getNumericalTime('a')) > 1700 )){
+            e.reply("Early out? Ask your boss mate...");
+            return;
+        }
+
+
         // Actions
         io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged Out", "");
         io.updateEligibility(ID, 'A');
         e.reply(io.findUser(ID) + " logged out: " + TimeThread.getDate() + " - " + TimeThread.getTime());
+
+        // Greetings
+        if(TimeThread.getNumericalTime('b').equals("12")){
+            e.reply("Please get back exactly at 1 PM :D Enjoy your lunch " + e.getAuthor().getAsMention());
+        }
+        else{
+            e.reply("Take care on your way home!!");
+        }
     }
 }

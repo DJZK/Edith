@@ -86,6 +86,14 @@ public class DatabaseParameters {
         ConsoleChannel = consoleChannel;
     }
 
+    public static String getGuildID() {
+        return GuildID;
+    }
+
+    public static void setGuildID(String guildID) {
+        GuildID = guildID;
+    }
+
     private static String finalLocation = null;
 
     private static String BotToken;
@@ -93,4 +101,5 @@ public class DatabaseParameters {
     private static String SudoPass;
     private static String ConsoleChannel;
     private static String ChannelID;
+    private static String GuildID;
 }

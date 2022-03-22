@@ -1,4 +1,4 @@
-package Commands;
+package Commands.Config;
 
 import Functions.DatabaseParameters;
 import Functions.DatabaseHandles;
@@ -8,9 +8,9 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 
-public class prefix extends Command {
+public class Prefix extends Command {
     private final JDA jda;
-    public prefix (JDA jda){
+    public Prefix(JDA jda){
         this.jda = jda;
         this.userPermissions = new Permission[]{Permission.ADMINISTRATOR};
         this.name = "prefix";

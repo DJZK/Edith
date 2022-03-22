@@ -1,4 +1,4 @@
-package Commands;
+package Commands.Employees;
 
 import Functions.DatabaseHandles;
 import Functions.DatabaseParameters;
@@ -55,6 +55,26 @@ public class in extends Command {
             e.reply("You're still logged on " + e.getAuthor().getAsMention());
             return;
         }
+
+        // Not allowed to log in outside work hours
+        if (!(TimeThread.getNumericalTime('b').equals("8") || TimeThread.getNumericalTime('b').equals("13"))) {
+            e.reply("Not allowed to log in at this point. What are you doing?");
+            return;
+        }
+
+
+        // Not allowed to log in after 1:30 PM
+        if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 1330) {
+            e.reply("~~all the time but this is, 30 freaking minutes too late.... but i wish you enjoyed your lunch!");
+            return;
+        }
+
+        // Not allowed to log in after 8:30 AM
+        if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 830) {
+            e.reply("more than 30 minutes late in the morning? Seriously!?");
+            return;
+        }
+
 
         // Actions
         io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged in", "from " + message[1]);

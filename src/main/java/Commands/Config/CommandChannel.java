@@ -1,14 +1,13 @@
-package Commands;
+package Commands.Config;
 
-import Functions.Commander;
 import Functions.DatabaseHandles;
 import Functions.DatabaseParameters;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import net.dv8tion.jda.api.Permission;
 
-public class channel extends Command {
-    public channel(){
+public class CommandChannel extends Command {
+    public CommandChannel(){
         this.userPermissions = new Permission[]{Permission.ADMINISTRATOR};
         this.name = "channel";
         this.help = "Changes my target channel for commands";

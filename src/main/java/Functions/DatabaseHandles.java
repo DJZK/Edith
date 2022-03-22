@@ -14,6 +14,8 @@ public class DatabaseHandles {
             statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getChannelID() + "' WHERE Function = 'Channel'");
             statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getConsoleChannel() + "' WHERE Function = 'ConsoleChannel'");
             statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getSudoPass() + "' WHERE Function = 'ConsolePass'");
+            statement.execute("UPDATE Config SET Parameter = '" + DatabaseParameters.getGuildID() + "' WHERE Function = 'GuildID'");
+
         } catch (SQLException sqlException){
             sqlException.printStackTrace();
         }
@@ -25,6 +27,7 @@ public class DatabaseHandles {
         DatabaseParameters.setBotPrefix((getConfigValue("Prefix")));
         DatabaseParameters.setSudoPass((getConfigValue("ConsolePass")));
         DatabaseParameters.setConsoleChannel((getConfigValue("ConsoleChannel")));
+        DatabaseParameters.setGuildID(getConfigValue("GuildID"));
     }
 
 
@@ -50,6 +53,14 @@ public class DatabaseHandles {
         return Value ;
     }
 
+    /**
+     *
+     * @param Date The current date
+     * @param Time The current time
+     * @param Name Name of the doer
+     * @param Activity Their activity
+     * @param ActivityReason The reason for that activity
+     */
     public void writeActivity(String Date, String Time, String Name, String Activity, String ActivityReason){
         try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DatabaseParameters.getFinalLocation());
             Statement statement = connection.createStatement()){

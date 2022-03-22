@@ -1,6 +1,7 @@
 package Functions;
 
-import Commands.*;
+import Commands.Config.*;
+import Commands.Employees.*;
 import Event.ConsoleEvent;
 import Event.Watcher;
 import com.jagrosh.jdautilities.command.CommandClient;
@@ -35,16 +36,17 @@ public class Commander extends ListenerAdapter {
         slash.setHelpWord("help");
 
         // Commands here!!
-        slash.addCommand(new prefix(jda));
-        slash.addCommand(new channel());
-        slash.addCommand(new Commands.in());
-        slash.addCommand(new Commands.out());
-        slash.addCommand(new back());
+        slash.addCommand(new Prefix(jda));
+        slash.addCommand(new CommandChannel());
+        slash.addCommand(new in());
+        slash.addCommand(new out());
         slash.addCommand(new timeout());
         slash.addCommand(new visitor());
-        slash.addCommand(new shutdown());
+        slash.addCommand(new Shutdown());
         slash.addCommand(new SudoPass());
         slash.addCommand(new ConsoleChannel());
+        slash.addCommand(new GuildID());
+        slash.addCommand(new overwrite());
 
         commands = slash.build();
 

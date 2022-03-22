@@ -1,4 +1,4 @@
-package Commands;
+package Commands.Employees;
 
 import Functions.DatabaseHandles;
 import Functions.DatabaseParameters;
@@ -18,6 +18,8 @@ public class visitor extends Command {
     @Override
     protected void execute(CommandEvent e){
         DatabaseHandles io = new DatabaseHandles();
+
+        // Not part of the user list
         if(io.findUser(e.getAuthor().getId()).equals("")){
             e.replyInDm("You are not allowed to do that!");
             if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
@@ -26,6 +28,7 @@ public class visitor extends Command {
             return;
         }
 
+        // Not int the designated place
         if(!e.getMessage().getTextChannel().getId().equals(DatabaseParameters.getChannelID())){
             e.getMessage().delete().queue();
             e.getJDA().getTextChannelById(DatabaseParameters.getChannelID()).sendMessage("Do that here! " + e.getAuthor().getAsMention()).queue();

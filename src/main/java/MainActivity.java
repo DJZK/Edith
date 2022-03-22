@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.jetbrains.annotations.NotNull;
+import Functions.TimeThread;
 
 import javax.security.auth.login.LoginException;
 
@@ -13,8 +14,9 @@ import static Functions.Commander.commander;
 
 public class MainActivity implements EventListener {
     public static void main(String[] args) throws LoginException, InterruptedException {
-
+        System.out.println(Integer.parseInt("0800"));
         DatabaseHandles db = new DatabaseHandles();
+
 
         // Will find the database
         DatabaseParameters.initDB();
@@ -40,6 +42,9 @@ public class MainActivity implements EventListener {
 
         // Calling your name again, remembering all the love you gave to me. Or how i used to be
         commander(jda);
+        TimeThread td = new TimeThread(jda);
+
+        td.realtime();
 
     }
 
