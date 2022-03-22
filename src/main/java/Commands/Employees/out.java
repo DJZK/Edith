@@ -49,7 +49,7 @@ public class out extends Command {
         }
 
         // Not allowed to log in outside work hours
-        if (!(TimeThread.getNumericalTime('b').equals("12") || Integer.parseInt(TimeThread.getNumericalTime('a')) > 1700 )){
+        if (!(TimeThread.getNumericalTime('b').equals("12") || Integer.parseInt(TimeThread.getNumericalTime('a')) >= 1700 )){
             e.reply("Early out? Ask your boss mate...");
             return;
         }
