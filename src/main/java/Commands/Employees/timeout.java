@@ -38,14 +38,14 @@ public class timeout extends Command {
             e.getJDA().getTextChannelById(DatabaseParameters.getChannelID()).sendMessage("Do that here! " + e.getAuthor().getAsMention()).queue();
             return;
         }
-
-        String[] message = e.getMessage().getContentRaw().split(" ", 2);
-
-        // Single command input
-        if (message.length == 1) {
-            e.reply(DatabaseParameters.getBotPrefix() + "break <reason>");
-            return;
-        }
+//
+//        String[] message = e.getMessage().getContentRaw().split(" ", 2);
+//
+//        // Single command input
+//        if (message.length == 1) {
+//            e.reply(DatabaseParameters.getBotPrefix() + "break <reason>");
+//            return;
+//        }
 
         // Not Logged On
         if (!io.actionEligibility(ID)[0]) {
@@ -80,9 +80,9 @@ public class timeout extends Command {
 
 
         // Will Take A break
-        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Went out", "reason: " + message[1]);
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Went out", "");
         io.updateEligibility(ID, 'B');
-        e.reply(io.findUser(ID) + " took a break: " + TimeThread.getDate() + " - " + TimeThread.getTime() + " for a reason: " + message[1]);
+        e.reply(io.findUser(ID) + " took a break: " + TimeThread.getDate() + " - " + TimeThread.getTime());
         e.reply("Your 15 minutes starts.... now!! " + e.getAuthor().getAsMention());
 
 
