@@ -36,19 +36,6 @@ public class in extends Command {
             return;
         }
 
-        String[] message = e.getMessage().getContentRaw().split(" ", 2);
-
-        // Single command input
-        if(message.length == 1){
-            e.reply(DatabaseParameters.getBotPrefix() + "in <site/remote> \nsite = from office \nremote = work from home... or wherever you are.");
-            return;
-        }
-
-        // No location
-        if(!(message[1].equalsIgnoreCase("site") || message[1].equalsIgnoreCase("remote"))){
-            e.reply("From where? Where are you working from...??");
-            return;
-        }
 
         // Still logged on
         if(io.checkActionEligibility(ID)[0]){
@@ -77,8 +64,8 @@ public class in extends Command {
 
 
         // Actions
-        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged in", "from " + message[1]);
+        io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged in", "");
         io.updateEligibility(ID, 'A');
-        e.reply(io.findUser(ID) + " logged in: " + TimeThread.getDate() + " - " + TimeThread.getTime() + " from " + message[1] );
+        e.reply(io.findUser(ID) + " logged in: " + TimeThread.getDate() + " - " + TimeThread.getTime());
     }
 }

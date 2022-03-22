@@ -1,3 +1,4 @@
+import Event.Greeter;
 import Functions.DatabaseHandles;
 import Functions.DatabaseParameters;
 import net.dv8tion.jda.api.JDA;
@@ -42,9 +43,9 @@ public class MainActivity implements EventListener {
 
         // Calling your name again, remembering all the love you gave to me. Or how i used to be
         commander(jda);
-        TimeThread td = new TimeThread(jda);
+        Greeter gt = new Greeter(jda);
 
-        td.realtime();
+        gt.realtime();
 
     }
 
