@@ -44,8 +44,9 @@ public class in extends Command {
         }
 
         // Not allowed to log in outside work hours
-        if (!(TimeThread.getNumericalTime('b').equals("8") || TimeThread.getNumericalTime('b').equals("13"))) {
+        if (!(TimeThread.getNumericalTime('b').equals("08") || TimeThread.getNumericalTime('b').equals("13"))) {
             e.reply("Not allowed to log in at this point. What are you doing?");
+            System.out.println(TimeThread.getNumericalTime('b'));
             return;
         }
 

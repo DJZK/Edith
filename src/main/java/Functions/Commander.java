@@ -47,6 +47,7 @@ public class Commander extends ListenerAdapter {
         slash.addCommand(new ConsoleChannel());
         slash.addCommand(new GuildID());
         slash.addCommand(new overwrite());
+        slash.addCommand(new flip());
 
         commands = slash.build();
 

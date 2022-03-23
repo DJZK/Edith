@@ -15,7 +15,7 @@ import static Functions.Commander.commander;
 
 public class MainActivity implements EventListener {
     public static void main(String[] args) throws LoginException, InterruptedException {
-        System.out.println(Integer.parseInt("0800"));
+        System.out.println(Integer.parseInt(TimeThread.getNumericalTime('a')));
         DatabaseHandles db = new DatabaseHandles();
 
 
