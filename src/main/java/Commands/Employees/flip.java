@@ -6,6 +6,8 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import net.dv8tion.jda.api.Permission;
 
+import java.util.Locale;
+
 public class flip extends Command {
     public flip(){
         this.name = "flip";
@@ -22,7 +24,13 @@ public class flip extends Command {
 
         // Not more than 2 params
         if(message.length < 2){
-            e.replyInDm(DatabaseParameters.getBotPrefix() + "flip <UserID> <A/A> \nA = LoggedOn B = OnBreak");
+            e.replyInDm(DatabaseParameters.getBotPrefix() + "flip <UserID> <A/B> \nA = LoggedOn B = OnBreak");
+            return;
+        }
+
+        // ID should be integer only
+        if(!message[1].matches("[0-9]*") || message[1].matches(" ") || message[1].matches("[a-zA-Z ]*")){
+            e.replyInDm("Please enter a valid user ID number");
             return;
         }
 
@@ -41,6 +49,23 @@ public class flip extends Command {
             e.getMessage().delete().queue();
             e.getJDA().getTextChannelById(DatabaseParameters.getChannelID()).sendMessage("Do that here! " + e.getAuthor().getAsMention()).queue();
             return;
+        }
+
+        // Actions
+        switch (message[2].charAt(0)){
+            case 'A':
+            case 'a':
+                io.updateEligibility(message[1], 'a');
+                e.replyInDm(io.findUser(message[1]) + "'s LoggedOn status has been flipped!");
+                break;
+            case 'B':
+            case 'b':
+                io.updateEligibility(message[1], 'b');
+                e.replyInDm(io.findUser(message[1]) + "'s OnBreak status has been flipped!");
+                break;
+            default:
+                e.replyInDm(DatabaseParameters.getBotPrefix() + "flip <UserID> <A/B> \nA = LoggedOn B = OnBreak");
+                break;
         }
 
 
