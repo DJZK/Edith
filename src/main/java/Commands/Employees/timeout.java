@@ -6,6 +6,7 @@ import Functions.TimeThread;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
+import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,14 +39,6 @@ public class timeout extends Command {
             e.getJDA().getTextChannelById(DatabaseParameters.getChannelID()).sendMessage("Do that here! " + e.getAuthor().getAsMention()).queue();
             return;
         }
-//
-//        String[] message = e.getMessage().getContentRaw().split(" ", 2);
-//
-//        // Single command input
-//        if (message.length == 1) {
-//            e.reply(DatabaseParameters.getBotPrefix() + "break <reason>");
-//            return;
-//        }
 
         // Not Logged On
         if (!io.checkActionEligibility(ID)[0]) {
@@ -67,16 +60,22 @@ public class timeout extends Command {
 
 
         // Not allowed up to 3:15 PM
-        if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 1515) {
-            e.reply("Too late my guy.. too late..");
-            return;
+        if(TimeThread.getNumericalTime('b').equals("15")){
+            if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 1515) {
+                e.reply("Too late my guy.. too late..");
+                return;
+            }
         }
 
+
         // Not allowed up to 10:15 AM
-        if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 1015) {
-            e.reply("Too late my guy.. too late..");
-            return;
+        if(TimeThread.getNumericalTime('b').equals("10")){
+            if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 1015) {
+                e.reply("Too late my guy.. too late..");
+                return;
+            }
         }
+
 
 
         // Will Take A break
