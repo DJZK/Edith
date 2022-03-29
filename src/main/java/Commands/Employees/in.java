@@ -52,17 +52,20 @@ public class in extends Command {
 
 
         // Not allowed to log in after 1:30 PM
-        if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 1330) {
-            e.reply("~~all the time but this is, 30 freaking minutes too late.... but i wish you enjoyed your lunch!");
-            return;
+        if(TimeThread.getNumericalTime('b').equals("13")){
+            if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 1330) {
+                e.reply("~~all the time but this is, 30 freaking minutes too late.... but i wish you enjoyed your lunch!");
+                return;
+            }
         }
 
         // Not allowed to log in after 8:30 AM
-        if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 830) {
-            e.reply("more than 30 minutes late in the morning? Seriously!?");
-            return;
+        if(TimeThread.getNumericalTime('b').equals("08")){
+            if (Integer.parseInt(TimeThread.getNumericalTime('a')) > 830) {
+                e.reply("more than 30 minutes late in the morning? Seriously!?");
+                return;
+            }
         }
-
 
         // Actions
         io.writeActivity(TimeThread.getDate(), TimeThread.getTime(), io.findUser(ID), "Logged in", "");
